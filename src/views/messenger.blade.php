@@ -35,8 +35,10 @@
 
                 <div class="panel-footer">
                     <input type="hidden" name="receiverId" value="{{$withUser->id}}">
-                    <textarea id="message-body" name="message" rows="2" placeholder="Type your message..."></textarea>
-                    <button type="submit" id="send-btn" class="btn btn-primary">SEND</button>
+                    <div class="textarea-container">
+                      <textarea id="message-body" name="message" rows="2" placeholder="Type your message..."></textarea>
+                    </div>
+                    <button type="submit" id="send-btn" class="btn-cta"> <i class="fa fa-paper-plane"></i> </button>
                 </div>
             </div>
         </div>
