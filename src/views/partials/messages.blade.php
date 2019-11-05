@@ -3,7 +3,6 @@ $authId = auth()->id();
 @endphp
 @if ($messages)
     @foreach ($messages as $key => $message)
-      {{ print_r($message) }}
         <div class="row message-row">
             <p title="{{date('d-m-Y h:i A' ,strtotime($message->created_at))}}"
                 @if ($message->sender_id === $authId)
