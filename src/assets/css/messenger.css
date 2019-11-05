@@ -7,8 +7,7 @@
 /*Send Box*/
 
 #message-body {
-  width: 85%;
-  border: 1px solid lightgray;
+  border: none;
   padding: 10px 20px;
   margin-bottom: 10px;
   border-radius: 0;
@@ -153,7 +152,7 @@
 }.row.message-row {
     margin-bottom: 8px;
 }.row.message-row {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     background-color:#fff;
     max-width: 75%;
     border-radius: 4px;
@@ -164,7 +163,7 @@
     position: absolute;
     right: 0;
 }
-.row.message-row::After {
+.row.message-row::after {
   content: '';
   position: absolute;
   left: 0px;
@@ -174,7 +173,7 @@
   height: 0;
   border-top: 12px solid #fff;
   border-left: 0px solid transparent;
-  border-right: 21px solid transparent;
+  border-right: 14px solid transparent;
   bottom: -10px;
 }
 .row.message-row.mine::After {
@@ -186,7 +185,47 @@
   width: 0;
   height: 0;
   border-top: 12px solid #DBF8C6;
-  border-left: 21px solid transparent;
+  border-left: 10px solid transparent;
   border-right: 0px solid transparent;
   bottom: -10px;
+}
+#send-btn {
+    background-color:
+    transparent;
+    border: none;
+}#send-btn {
+    background-color:#488277;
+    border: none;
+    color:#fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;margin-left: 10px;
+}
+#send-btn:hover {background-color:#79B3A8;}
+.panel-footer {
+    background-color:
+    #EEE;
+}
+.textarea-container{
+  width: 80%;
+  display: inline-block;
+  position: relative;
+  margin-left: 20px;
+}
+.textarea-container textarea{
+  width:100%;
+}
+.textarea-container::after{
+  content: '';
+  position: absolute;
+  left: auto;
+  right: -14px;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-top: 30px solid #fff;
+  border-left: 0px solid transparent;
+  border-right: 21px solid transparent;
+  bottom: auto;
+  top: 0;
 }

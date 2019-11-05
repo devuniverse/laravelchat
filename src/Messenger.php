@@ -204,12 +204,16 @@ class Messenger
     public function deleteMessage($messageId, $authId)
     {
         $message = Message::findOrFail($messageId);
+
         if ($message->sender_id == $authId) {
             $message->update(['deleted_from_sender' => 1]);
         } else {
             $message->update(['deleted_from_receiver' => 1]);
         }
-
+        //If deleted for both, we obliterate it
+        if($message->deleted_from_sender == 1 && $message->deleted_from_receiver == 1){
+          $message->delete();
+        }
         return response()->json(['success' => true], 200);
     }
 }
