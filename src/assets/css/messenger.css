@@ -1,0 +1,192 @@
+.messenger {
+    height: 24em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/*Send Box*/
+
+#message-body {
+  width: 85%;
+  border: 1px solid lightgray;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 0;
+  resize: none;
+  height: 59px;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*Headers*/
+.panel-default>.panel-heading {
+    background-color: #2a88bd;
+    color: #fff;
+}
+/*Profile*/
+.panel-default>.panel-body p span {
+    color: #ccc;
+    font-weight: bold;
+}
+/*Messages*/
+.messenger-body div p {
+    color: #293B1C;
+    padding: 5px 1em;
+    margin: 3px 1em;
+    width: fit-content;
+    width: -moz-fit-content;
+    max-width: 80%;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.sent {
+    background-color: #63b4dc;
+    float: right;
+}
+.received {
+    background-color: #ccc;
+    float: left;
+}
+.unsent {
+    color: #f03d25;
+    float: right;
+    cursor: pointer;
+}
+
+/*Threads*/
+
+.thread-link:hover {
+    text-decoration: none;
+}
+
+.thread-row {
+    background-color: #fff;
+    padding-top: 8px;
+}
+
+.thread-row:hover, .current {
+    background-color: #f3f3f2;
+}
+
+.thread-user {
+    color: #000;
+    padding: 0 1em;
+}
+
+.thread-message {
+    padding: 0 1em;
+    color: #999999;
+    font-size: 13px;
+}
+
+.unseen {
+    font-weight: bold;
+}
+.unseen p.thread-message {
+    color: #333;
+}
+/*Messages Preloader*/
+
+#messages-preloader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.start-conv {
+    text-align: center;
+    color: #ccc;
+}
+
+/*Menu Dots*/
+
+.fa-ellipsis-h {
+    color: #b9b9b9;
+    display: none;
+    position: relative;
+}
+
+.fa-ellipsis-h:hover {
+    cursor: pointer;
+}
+
+.delete {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  background-color:#000;
+  color:#fff;
+  opacity: 0.8;
+  font-size: 12px;
+  border-radius: 0;
+    padding: 8px 24px;
+  z-index: 10;min-width: 8.1em;
+}
+.delete .fa.fa-spinner.fa-spin {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+.row.message-row.mine {
+    background-color:#DBF8C6;
+    width: 85%;
+    margin-left: auto;margin-right: 8px;
+}
+.row.message-row .sent {
+    background-color:#DBF8C6;
+    color: #293B1C;
+}.messenger-body {
+    background-color:#EEE;padding-bottom: 10px;
+}.row.message-row {
+    margin-bottom: 8px;
+}.row.message-row {
+    margin-bottom: 8px;
+    background-color:#fff;
+    max-width: 75%;
+    border-radius: 4px;
+    color: #293B1C;margin-left: 20px;
+    position: relative;
+}
+.row.message-row .fa.fa-ellipsis-h {
+    position: absolute;
+    right: 0;
+}
+.row.message-row::After {
+  content: '';
+  position: absolute;
+  left: 0px;
+  right: auto;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-top: 12px solid #fff;
+  border-left: 0px solid transparent;
+  border-right: 21px solid transparent;
+  bottom: -10px;
+}
+.row.message-row.mine::After {
+  content: '';
+  position: absolute;
+  left: auto;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-top: 12px solid #DBF8C6;
+  border-left: 21px solid transparent;
+  border-right: 0px solid transparent;
+  bottom: -10px;
+}

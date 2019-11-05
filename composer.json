@@ -1,0 +1,48 @@
+{
+    "name": "devuniverse/laravelchat",
+    "description": "Laravel chat package",
+    "license": "MIT",
+    "keywords": [
+        "message",
+        "inbox",
+        "conversations",
+        "chat",
+        "php",
+        "laravel",
+        "realtime",
+        "real-time",
+        "talk",
+        "fb chat",
+        "like facebook chat",
+        "like facebook messenger",
+	"support chat"
+    ],
+    "homepage": "https://github.com/devuniverse/laravelchat",
+    "authors": [
+        {
+            "name": "Devuniverse",
+            "email": "codiivdev@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": ">=6.0",
+        "illuminate/support": ">=5.3.0",
+      	"laravelcollective/html": ">=5.3.0",
+      	"pusher/pusher-php-server": ">=2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Devuniverse\\Laravelchat\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devuniverse\\Laravelchat\\LaravelMessengerServiceProvider"
+            ],
+            "aliases": {
+                "Messenger": "Devuniverse\\Laravelchat\\Facades\\Messenger"
+            }
+        }
+    }
+}
