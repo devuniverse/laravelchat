@@ -26,12 +26,21 @@ return [
     */
 
     'pusher' => [
-        'app_id'     => '',
-        'app_key'    => '',
-        'app_secret' => '',
+        'app_id'     => env('PUSHER_APP_ID'),
+        'app_key'    => env('PUSHER_APP_KEY'),
+        'app_secret' => env('PUSHER_APP_SECRET'),
         'options' => [
-            'cluster'   => '',
+            'cluster'   => env('PUSHER_APP_CLUSTER'),
             'encrypted' => true
         ]
     ],
+
+    /**
+     *|
+     */
+    "messengerpath"      => "{lang}/x/messenger",
+    /**
+     *|
+     */
+    "master_file_extend" => "layouts.backend",
 ];

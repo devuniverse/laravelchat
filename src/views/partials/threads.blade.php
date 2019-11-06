@@ -1,10 +1,8 @@
 <div class="panel panel-default">
-    <div class="panel-heading"><h4>Threads</h4></div>
-
     <div class="panel-body">
         @foreach ($threads as $key => $thread)
             @if ($thread->lastMessage)
-                <a href="/messenger/t/{{$thread->withUser->id}}" class="thread-link">
+                <a href="/{{ $chatPrefix }}/messenger/t/{{ \Crypt::encryptString($thread->withUser->id) }}" class="thread-link">
                     <div class="row thread-row
                     @if (
                         !$thread->lastMessage->is_seen &&

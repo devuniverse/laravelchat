@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Devuniverse\Laravelchat\Controllers;
 
+use App\Http\Controllers\Controller;
 use Pusher\Pusher;
+use Crypt;
 use Illuminate\Http\Request;
 use Devuniverse\Laravelchat\Models\Message;
 use Devuniverse\Laravelchat\Facades\Messenger;
@@ -26,14 +28,15 @@ class MessageController extends Controller
      * @param  int  $withId
      * @return Response
      */
-    public function laravelMessenger($withId)
+    public function laravelMessenger(Request $request)
     {
-        Messenger::makeSeen(auth()->id(), $withId);
-        $withUser = config('messenger.user.model', 'App\User')::findOrFail($withId);
+        $userId = Crypt::decryptString($request->id);
+        Messenger::makeSeen(auth()->id(), $userId);
+        $withUser = config('messenger.user.model', 'App\User')::findOrFail($userId);
         $messages = Messenger::messagesWith(auth()->id(), $withUser->id);
         $threads  = Messenger::threads(auth()->id());
 
-        return view('messenger::messenger', compact('withUser', 'messages', 'threads'));
+        return view('messenger::messenger', ['withUser'=>$withUser, 'messages'=>$messages, 'threads'=>$threads]);
     }
 
     /**
@@ -55,7 +58,6 @@ class MessageController extends Controller
         }
 
         $message = Messenger::newMessage($conversation->id, $authId, $request->message);
-
         // Pusher
         $pusher = new Pusher(
             config('messenger.pusher.app_key'),
@@ -70,10 +72,11 @@ class MessageController extends Controller
             'senderId'   => $authId,
             'withId'     => $withId
         ]);
-
+        $message['whoseisit']= ($authId !== $withId) ? 'mine' : 'none';
         return response()->json([
             'success' => true,
-            'message' => $message
+            'message' => $message,
+
         ], 200);
     }
 
@@ -138,9 +141,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return Response.
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $confirm = Messenger::deleteMessage($id, auth()->id());
+        $confirm = Messenger::deleteMessage($request->id, auth()->id());
 
         return response()->json(['success' => true], 200);
     }
