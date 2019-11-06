@@ -26,7 +26,7 @@
      */
     function makeSeen(authId, withId) {
         $.ajax({
-            url: '/messenger/ajax/make-seen',
+            url: '/'+chatPrefix+'/messenger/ajax/make-seen',
             method: 'POST',
             data: {authId: authId, withId: withId}
         }).done(function (res) {
@@ -94,7 +94,7 @@
      */
     function loadThreads() {
         $.ajax({
-            url: '/messenger/threads',
+            url: '/'+chatPrefix+'/messenger/threads',
             method: 'GET',
             data: {withId: withId}
         }).done(function (view) {
@@ -107,7 +107,7 @@
      */
     function loadMessages() {
         $.ajax({
-            url: '/messenger/more/messages',
+            url: '/'+chatPrefix+'/messenger/more/messages',
             method: 'GET',
             data: {
                 withId: withId,
@@ -148,7 +148,7 @@
           var message = $('#message-body').val();
           if (message) {
               var JqHXR = $.ajax({
-                  url: '/messenger/send',
+                  url: '/'+chatPrefix+'/messenger/send',
                   method: 'POST',
                   data: {
                       message: message,
@@ -244,7 +244,7 @@
               $message = $(this).parent().parent();
 
           $.ajax({
-              url: '/messenger/delete/' + id,
+              url: '/'+chatPrefix+'/messenger/delete/' + id,
               method: 'DELETE'
           }).done(function (res) {
               if (res.success) {

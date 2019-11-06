@@ -2,6 +2,8 @@
 
 namespace Devuniverse\Laravelchat;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelMessengerServiceProvider extends ServiceProvider
@@ -14,33 +16,23 @@ class LaravelMessengerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            // config file.
             __DIR__.'/config/messenger.php' => config_path('messenger.php'),
-            // controller.
-            __DIR__.'/Http/Controllers/MessageController.php'
-                => app_path('Http/Controllers/MessageController.php'),
-            // assets.
             __DIR__.'/assets' => public_path('vendor/messenger'),
-	    // routes
-	    __DIR__.'/routes/' => base_path('/routes/'),
+            __DIR__.'/views' => resource_path('views/vendor/messenger'),
         ]);
 
         // routes.
-//        $this->loadRoutesFrom(base_path('routes/messenger.php'));
+       $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
         // migrations.
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        // publish under messenger-migrations tag.
-        $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'messenger-migrations');
 
-        // views.
-        $this->loadViewsFrom(__DIR__.'/views', 'messenger');
-        // publish under messenger-views tag.
-        $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/messenger'),
-        ], 'messenger-views');
+        view()->composer('*', function ($view){
+
+         $view->with('chatPrefix', \Request()->lang.'/x' );
+
+        });
+
     }
 
     /**
@@ -50,9 +42,18 @@ class LaravelMessengerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        // register our controller
+        $this->app->make('Devuniverse\Laravelchat\Controllers\MessageController');
         // Messenger Facede.
         $this->app->singleton('messenger', function () {
             return new Messenger;
         });
+        $this->loadViewsFrom(__DIR__.'/views', 'messenger');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/config/messenger.php', 'messenger'
+        );
+
     }
 }

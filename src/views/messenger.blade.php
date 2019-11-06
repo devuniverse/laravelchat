@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Config::get('messenger.master_file_extend'))
 
 @section('css-styles')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -45,8 +45,6 @@
 
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading"><h4>Profile</h4></div>
-
                 <div class="panel-body">
                     <p>
                         <span>Name</span> {{$withUser->name}}
@@ -64,6 +62,7 @@
 @section('js-scripts')
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
     <script type="text/javascript">
+    var chatPrefix = "<?php echo $chatPrefix; ?>";
         var withId        = {{$withUser->id}},
             authId        = {{auth()->id()}},
             messagesCount = {{is_array($messages) ? count($messages) : '0'}};

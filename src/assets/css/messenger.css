@@ -14,7 +14,7 @@
   resize: none;
   height: 59px;
   vertical-align: middle;
-  display: inline-block;
+  display: inline-block;overflow: hidden;
 }
 /*Headers*/
 .panel-default>.panel-heading {
