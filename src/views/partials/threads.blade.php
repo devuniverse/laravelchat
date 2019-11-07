@@ -1,31 +1,27 @@
-<div class="panel panel-default">
-    <div class="panel-body">
-        @foreach ($threads as $key => $thread)
-            @if ($thread->lastMessage)
-                <a href="/{{ $chatPrefix }}/messenger/t/{{ \Crypt::encryptString($thread->withUser->id) }}" class="thread-link">
-                    <div class="row thread-row
-                    @if (
-                        !$thread->lastMessage->is_seen &&
-                        $thread->lastMessage->sender_id != auth()->id()
-                    )
-                        unseen
+@foreach ($threads as $key => $thread)
+    <li class="@if (
+        !$thread->lastMessage->is_seen &&
+        $thread->lastMessage->sender_id != auth()->id()
+    )
+        unseen
+    @endif
+    @if ($thread->withUser->id === $withUser->id)
+        active
+    @endif">
+        @if ($thread->lastMessage)
+            <a href="/{{ $chatPrefix }}/messenger/t/{{ \Crypt::encryptString($thread->withUser->id) }}" class="thread-link">
+                <img src="/bck/assets/images/xs/avatar1.jpg" alt="avatar" />
+                <div class="about">
+                  <div class="name">{{$thread->withUser->name}}</div>
+                  <div class="lastmessage">
+                    @if ($thread->lastMessage->sender_id === auth()->id())
+                        <i class="fa fa-reply" aria-hidden="true"></i>
                     @endif
-                    @if ($thread->withUser->id === $withUser->id)
-                        current
-                    @endif
-                    ">
-                        <p class="thread-user">
-                            {{$thread->withUser->name}}
-                        </p>
-                        <p class="thread-message">
-                            @if ($thread->lastMessage->sender_id === auth()->id())
-                                <i class="fa fa-reply" aria-hidden="true"></i>
-                            @endif
-                            {{substr($thread->lastMessage->message, 0, 20)}}
-                        </p>
-                    </div>
-                </a>
-            @endif
-        @endforeach
-    </div>
-</div>
+                    {{substr($thread->lastMessage->message, 0, 20)}}
+                  </div>
+                  <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
+                </div>
+            </a>
+        @endif
+    </li>
+@endforeach

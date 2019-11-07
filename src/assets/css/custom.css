@@ -1,0 +1,29 @@
+.chat .chat-history .other-message::after {
+    border-bottom-color: #e8f1f3;
+    left: auto;
+}
+.message-action {
+    display: none;
+}
+.people_list .about .name{
+    float: left;
+    padding-left: 8px;
+    text-transform: capitalize;
+    color:#fff !important;
+}
+.lastmessage {
+    font-weight: bold;
+}
+.chat .chat-history {
+    padding: 20px;
+    border-bottom: 2px solid
+    #fff;
+    max-height: 45em;
+    overflow-y: scroll;
+    overflow-x: hidden;min-height: 30em;
+}
+.chat .chat-history .other-message::after {
+    border-bottom-color: #e8f1f3;
+    left: auto;
+}
+.chat_app {min-height: 40em;}

@@ -21,7 +21,10 @@ class MessageController extends Controller
     {
         $this->middleware(['web', 'auth']);
     }
+    public function messengerHome(){
 
+      return view('messenger::home');
+    }
     /**
      * Get messenger page.
      *
@@ -29,7 +32,7 @@ class MessageController extends Controller
      * @return Response
      */
     public function laravelMessenger(Request $request)
-    {
+    {   
         $userId = Crypt::decryptString($request->id);
         Messenger::makeSeen(auth()->id(), $userId);
         $withUser = config('messenger.user.model', 'App\User')::findOrFail($userId);
