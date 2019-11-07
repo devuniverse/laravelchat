@@ -60,12 +60,16 @@
      * Append a new message to chat body.
      */
     function newMessage(message, messageClass, failed = 0) {
+        console.log(message);
         $('.messenger-body').append('\
-            <div class="row message-row '+ message.whoseisit +'">\
-                <p class="' + messageClass + '">' + message.message + '</p>\
-                '+ newMenu(messageClass, message.id) +'\
-            </div>\
-        ');
+            <li class="clearfix animated '+ (message.whoseisit =='mine' ? 'slideInLeft':'slideInRight')+' '+ message.whoseisit +'">\
+                <div class="message-data ' + messageClass + '">'+
+                    '<span class="message-data-time">10:12 AM, Today</span>'+
+                '</div>'+
+                '<div class="message '+( message.whoseisit=='mine' ? 'my-message':'other-message float-right')+'">' + message.message + '</div>'+
+                '<div class="message-action">'+ newMenu(messageClass, message.id) +'</div>'+
+            '</li>'
+          );
         if (failed) {
             $('.messenger-body').append('\
                 <a class="unsent">\
