@@ -32,7 +32,7 @@ class MessageController extends Controller
      * @return Response
      */
     public function laravelMessenger(Request $request)
-    {   
+    {
         $userId = Crypt::decryptString($request->id);
         Messenger::makeSeen(auth()->id(), $userId);
         $withUser = config('messenger.user.model', 'App\User')::findOrFail($userId);
@@ -61,6 +61,9 @@ class MessageController extends Controller
         }
 
         $message = Messenger::newMessage($conversation->id, $authId, $request->message);
+        $message['timeago']= ($message->created_at)->diffForHumans();
+        $message['convoid']= Crypt::encryptString($conversation->id);
+
         // Pusher
         $pusher = new Pusher(
             config('messenger.pusher.app_key'),
@@ -76,6 +79,8 @@ class MessageController extends Controller
             'withId'     => $withId
         ]);
         $message['whoseisit']= ($authId !== $withId) ? 'mine' : 'none';
+
+
         return response()->json([
             'success' => true,
             'message' => $message,
