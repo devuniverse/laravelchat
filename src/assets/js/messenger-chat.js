@@ -5,6 +5,7 @@
     var take       = (messagesCount < 20) ? 0 : 20, // represents the number of messages to be displayed.
         $messenger = $('.messenger'),
         $loader    = $('#messages-preloader'),
+        $entityslug    = (JSON.parse($('[name="entity"]').prop("content"))).entity ,
         channel    = pusher.subscribe('messenger-channel');
 
     /**
@@ -21,6 +22,11 @@
         }
     });
 
+    function addBlue(){
+      $.each('.other-message', function(key,value){
+        $(this).find('.fa-check').addClass('fa-seenblue');
+      });
+    }
     /**
      * Make a message seen.
      */
@@ -32,6 +38,7 @@
         }).done(function (res) {
             if (res.success) {
                 loadThreads();
+                $('.other-message').find('.fa-check').removeClass('fa-check').addClass('fa-check-circle faseen');
             }
         });
     }
@@ -60,14 +67,16 @@
      * Append a new message to chat body.
      */
     function newMessage(message, messageClass, failed = 0) {
-        console.log(message);
+
         $('.messenger-body').append('\
-            <li class="clearfix animated '+ (message.whoseisit =='mine' ? 'slideInLeft':'slideInRight')+' '+ message.whoseisit +'">\
-                <div class="message-data ' + messageClass + '">'+
-                    '<span class="message-data-time">10:12 AM, Today</span>'+
+            <li class="clearfix animated '+ (message.whoseisit =='mine' ? 'slideInDown':'slideInUp')+' '+ message.whoseisit +'" id="'+message.convoid+'">\
+                <div class="message-inner clearfix">'+
+                '<div class="message-data ' + messageClass + '">'+
+                    '<span class="message-data-time">'+message.timeago+'</span>'+
                 '</div>'+
-                '<div class="message '+( message.whoseisit=='mine' ? 'my-message':'other-message float-right')+'">' + message.message + '</div>'+
+                '<div class="message '+( message.whoseisit=='mine' ? 'my-message':'other-message float-right')+'">' + message.message +' <i class="fa fa-check"></i></div>'+
                 '<div class="message-action">'+ newMenu(messageClass, message.id) +'</div>'+
+                '</div>'+
             '</li>'
           );
         if (failed) {
@@ -90,7 +99,8 @@
     function scrollMessagesDown(height = 0) {
         var scrollTo = height || $messenger.prop('scrollHeight');
 
-        $messenger.scrollTop(scrollTo);
+        // $messenger.scrollTop(scrollTo);
+        $messenger.scrollTop(2000);
     }
 
     /**
@@ -136,13 +146,18 @@
      */
     function playTweet() {
         var audio = new Audio('/vendor/messenger/sounds/tweet.mp3');
+        audio.volume = 0.1;
         audio.play();
     }
 
     $(document).ready(function () {
+      setInterval(function() {
+          loadThreads();
+      }, 20 * 1000); // 60 * 1000 milsec
+
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="projefyxo"]').attr('content')
             }
         });
 
@@ -259,4 +274,5 @@
           });
         });
     });
+
 }());

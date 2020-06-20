@@ -43,4 +43,18 @@ return [
      *|
      */
     "master_file_extend" => "layouts.backend",
+    /*
+    |--------------------------------------------------------------------------
+    | Messenger Fontawesome include
+    |--------------------------------------------------------------------------
+    |
+    | Depending on where you want to integrate the chat, include fontawesome or not
+    |
+    */
+    'fontawesome' => true,
+
+    /**
+     *|
+     */
+    "permission_package" => true,
 ];

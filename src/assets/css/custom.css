@@ -6,13 +6,58 @@
     display: none;
 }
 .people_list .about .name{
-    float: left;
-    padding-left: 8px;
-    text-transform: capitalize;
-    color:#fff !important;
+  padding-left: 0;
+  text-transform: capitalize;color: #ccc;
+}
+.people_list .unseen .about .name{
+  color: #3D3C3F
+}
+.people_list .active .about .name {
+    color:#fff;
+}
+.people_list { padding: 0 !important;}
+.people_list .status {
+    color:#65D0DE;
+}
+.chat {
+  background-color:#FAFAFA;
+  padding: 15px;
+  margin: auto;
+  float: right;
+}
+.unseen .name {
+    color:#A2A19F;
+}
+.messenger-body li {
+    display: block;
+    width: 100%;margin-bottom: 3px;
+}
+.messenger-body li .message-inner{
+    background-color:#fff;
+    max-width: 600px;padding: 10px;
+}
+.messenger-body li.mine .message-inner{
+    background-color:#DCF8C7;
+    padding: 10px;
+    float: right;
+    clear: both;
+}
+.emojis-container {
+    width: 0px;
+}.faseen {
+    color:#0CB0E4;
+}
+.messenger-chat-history.messenger {
+    background-color:#F7F1E8;
+    padding: 14px;
+    max-height: 42em;
+    overflow-y: scroll;
+}
+.messenger-body{
+    list-style: none;
 }
 .lastmessage {
-    font-weight: bold;
+    font-weight: bold;color:#79D6E2;
 }
 .chat .chat-history {
     padding: 20px;
@@ -27,3 +72,33 @@
     left: auto;
 }
 .chat_app {min-height: 40em;}
+.other-message .fa.fa-check-circle.faseen {
+    color:#0CB0E4;
+}
+/******************************** UNIFIED ***********************************/
+.messenger .threads li {
+  display: inline-block;
+  vertical-align: middle;
+  height: auto;
+  width: 100%;
+  background-color: #F7F6F8;
+  border-bottom: 1px solid #eee;
+  padding: 8px 4px;
+}
+.messenger .threads li.active {
+background-color: #01B7CD;
+}
+.messenger .threads li.unseen {
+background-color: #FDFBE0;
+}
+.thread-link img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+}
+.thread-link .about {
+    display: inline-block !important;
+    vertical-align: middle;
+    width: calc(100% - 40px);
+    float: none;
+}
