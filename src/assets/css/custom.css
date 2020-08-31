@@ -32,9 +32,11 @@
     display: block;
     width: 100%;margin-bottom: 3px;
 }
-.messenger-body li .message-inner{
-    background-color:#fff;
-    max-width: 600px;padding: 10px;
+.messenger-body li .message-inner {
+    background-color: #fff;
+    max-width: 600px;
+    padding: 10px;
+    position: relative;
 }
 .messenger-body li.mine .message-inner{
     background-color:#DCF8C7;
@@ -80,16 +82,17 @@
   display: inline-block;
   vertical-align: middle;
   height: auto;
-  width: 100%;
+  width: auto;
   background-color: #F7F6F8;
   border-bottom: 1px solid #eee;
   padding: 8px 4px;
 }
 .messenger .threads li.active {
-background-color: #01B7CD;
+ border: 2px solid #01B7CD;
 }
 .messenger .threads li.unseen {
 background-color: #FDFBE0;
+
 }
 .thread-link img {
     display: inline-block;
@@ -97,8 +100,25 @@ background-color: #FDFBE0;
     width: 40px;
 }
 .thread-link .about {
-    display: inline-block !important;
+    display: none;
     vertical-align: middle;
     width: calc(100% - 40px);
     float: none;
 }
+.list-unstyled.threads.messenger-chat-list {
+    background-color: #fff;
+}
+.message-action .delete {
+    float: left;
+}
+.delete .fa.fa-times {
+    color: white;
+    background-color: #f00;
+    padding: 0 3px;
+    border-radius: 17px;
+}
+@media only screen and (min-width: 60em){
+    .thread-link .about { display: inline-block; }
+    .messenger .threads li {width: 100%;}
+}
+

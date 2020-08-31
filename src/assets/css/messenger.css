@@ -38,12 +38,21 @@
     background-color: #fff;
 }
 .sent {
-    background-color: #63b4dc;
+    background-color: transparent;
     float: right;
+    margin-left: 14px;
+    color: #a9a9a9;
+    font-style: italic;
+    font-size: 10px;
 }
-.received {
-    background-color: #ccc;
-    float: left;
+.message-data.received{
+    font-size: 12px;
+    background-color: transparent;
+    float: right;
+    color: #ccc;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 .unsent {
     color: #f03d25;

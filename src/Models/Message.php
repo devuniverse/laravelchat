@@ -17,7 +17,8 @@ class Message extends Model
         'message',
         'is_seen',
         'deleted_from_sender',
-        'deleted_from_receiver'
+        'deleted_from_receiver',
+        'entity_id'
     ];
 
     /**

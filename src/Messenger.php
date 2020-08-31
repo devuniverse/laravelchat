@@ -49,9 +49,16 @@ class Messenger
      */
     public function newConversation($authId, $withId)
     {
+        if(isset(\Request()->entity)){
+            $workspace = \Request()->entity;
+            $workspaceID = \Devuniverse\Laravelchat\Models\Entity::where("slug", $workspace)->first()->id;
+        }else{
+            $workspaceID = 0;
+        }
         $conversation = Conversation::create([
             'user_one' => $authId,
-            'user_two' => $withId
+            'user_two' => $withId,
+            'entity_id'=>$workspaceID
         ]);
 
         return $conversation;
@@ -64,9 +71,10 @@ class Messenger
      * @param  int  $take  (optional)
      * @return collection
      */
-    public function userConversations($authId, $take = 20)
+    public function userConversations($authId, $take = 20, $workspace=0)
     {
         $collection    = Conversation::whereUserOne($authId)
+            ->where('entity_id', $workspace)
             ->orWhere('user_two', $authId);
         $totalRecords  = $collection->count();
         $conversations = $collection->take($take)
@@ -96,8 +104,16 @@ class Messenger
         $deletedReceiver = 0
     )
     {
+        if(isset(\Request()->entity)){
+            $workspace = \Request()->entity;
+            $workspaceID = \Devuniverse\Laravelchat\Models\Entity::where("slug", $workspace)->first()->id;
+        }else{
+            $workspaceID = 0;
+        }
+
         $message = Message::create([
             'conversation_id'       => $conversationId,
+            'entity_id'             => $workspaceID,
             'sender_id'             => $senderId,
             'message'               => $message,
             'is_seen'               => $isSeen,
@@ -119,9 +135,16 @@ class Messenger
     public function messagesWith($authId, $withId, $take = 20)
     {
         $conversation = $this->getConversation($authId, $withId);
+        if(isset(\Request()->entity)){
+            $workspace = \Request()->entity;
+            $workspaceID = \Devuniverse\Laravelchat\Models\Entity::where("slug", $workspace)->first()->id;
+        }else{
+            $workspaceID = 0;
+        }
 
         if ($conversation) {
             $messages = Message::whereConversationId($conversation->id)
+                ->where("entity_id", $workspaceID)
                 ->where(function ($query) use ($authId, $withId) {
                     $query->where(function ($qr) use ($authId) {
                         $qr->where('sender_id', $authId) // this message is sent by the authUser.
@@ -150,7 +173,13 @@ class Messenger
      */
     public function threads($authId, $take = 20)
     {
-        $conversations = $this->userConversations($authId, $take);
+        if(isset(\Request()->entity)){
+            $workspace = \Request()->entity;
+            $workspaceID = \Devuniverse\Laravelchat\Models\Entity::where("slug", $workspace)->first()->id;
+        }else{
+            $workspaceID = 0;
+        }
+        $conversations = $this->userConversations($authId, $take,$workspaceID );
         $threads       = [];
 
         foreach ($conversations as $key => $conversation) {

@@ -12,7 +12,7 @@ class Conversation extends Model
      * @var array
      */
     protected $fillable = [
-        'user_one', 'user_two'
+        'user_one', 'user_two', 'entity_id'
     ];
 
     /**
